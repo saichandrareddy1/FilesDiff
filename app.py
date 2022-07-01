@@ -24,7 +24,7 @@ if datafile is not None:
 datafile = st.file_uploader("Upload Paid CSV", type=['csv'])
 if datafile is not None:
     file_details = {"FileName":datafile.name,"FileType":datafile.type}
-    df  = pd.read_csv(datafile, header=None)
+    df  = pd.read_csv(datafile)
     st.dataframe(df)
     # Apply Function here
     save_uploaded_file(datafile)
