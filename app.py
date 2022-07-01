@@ -6,25 +6,32 @@ Here's our first attempt at using data to create a table:
 import streamlit as st
 import pandas as pd
 import os
+from PIL import Image
 
+
+# image = Image.open('./Codingrad Logo- White.png')
+# image = image.resize((1200,700))
+# st.image(image)
 
 def save_uploaded_file(uploadedfile):
   with open(os.path.join("Data",uploadedfile.name),"wb") as f:
      f.write(uploadedfile.getbuffer())
   return st.success("Saved file :{} in tempDir".format(uploadedfile.name))
 
-datafile = st.file_uploader("Upload Register CSV", type=['csv'])
+st.title("Upload DEMO Register Data")
+datafile = st.file_uploader("Register CSV", type=['csv'])
 if datafile is not None:
     file_details = {"FileName":datafile.name,"FileType":datafile.type}
-    df  = pd.read_csv(datafile)
+    df  = pd.read_csv(datafile, encoding = 'ISO-8859-1')
     st.dataframe(df)
     # Apply Function here
     save_uploaded_file(datafile)
 
-datafile = st.file_uploader("Upload Paid CSV", type=['csv'])
+st.title("Upload Course Paid CSV")
+datafile = st.file_uploader("Paid CSV", type=['csv'])
 if datafile is not None:
     file_details = {"FileName":datafile.name,"FileType":datafile.type}
-    df  = pd.read_csv(datafile)
+    df  = pd.read_csv(datafile, encoding = 'ISO-8859-1')
     st.dataframe(df)
     # Apply Function here
     save_uploaded_file(datafile)
@@ -33,8 +40,10 @@ if datafile is not None:
 class difference_dataframe:
     
     def __init__(self, registereddata, paiddata):
-        self.registereddata = pd.read_csv(registereddata)
+        self.registereddata = pd.read_csv(registereddata, encoding = 'ISO-8859-1')
         self.paiddata = pd.read_csv(paiddata)
+
+        self.registereddata = self.registereddata.rename(columns={"EMAIL":"Email"})
         
     def calls_data(self):
         call_data = self.registereddata[~self.registereddata['Email'].isin(self.paiddata['Email'])].reset_index().drop(['index'], axis=1)
