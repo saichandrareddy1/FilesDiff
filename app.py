@@ -1,18 +1,12 @@
-"""
-# My first app
-Here's our first attempt at using data to create a table:
-"""
-
 import streamlit as st
 import pandas as pd
 import os
 from PIL import Image
 
-
 # image = Image.open('./Codingrad Logo- White.png')
 # image = image.resize((1200,700))
 # st.image(image)
-
+st.markdown("<h1 style='text-align: center; color: white;'>CodinGrad</h1>", unsafe_allow_html=True)
 def save_uploaded_file(uploadedfile):
   with open(os.path.join("Data",uploadedfile.name),"wb") as f:
      f.write(uploadedfile.getbuffer())
