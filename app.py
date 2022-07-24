@@ -3,9 +3,6 @@ import pandas as pd
 import os
 from PIL import Image
 
-# image = Image.open('./Codingrad Logo- White.png')
-# image = image.resize((1200,700))
-# st.image(image)
 st.markdown("<h1 style='text-align: center; color: white;'>CodinGrad</h1>", unsafe_allow_html=True)
 def save_uploaded_file(uploadedfile):
   with open(os.path.join("Data",uploadedfile.name),"wb") as f:
@@ -51,8 +48,8 @@ def convert_df(df):
 result = st.button("Run")
 if result:
     data_diff = difference_dataframe(
-        registereddata=os.path.join(os.getcwd(), "Data", "RegisterData.csv"),
-        paiddata=os.path.join(os.getcwd(), "Data", "PaidData.csv")
+        registereddata=os.path.join(os.getcwd(), "Data", "testing_registrations.csv"),
+        paiddata=os.path.join(os.getcwd(), "Data", "tetsingpaid.csv")
     ).calls_data()
     st.dataframe(data_diff)
     # data_diff.to_csv("./Data/CallsData.csv")
@@ -71,11 +68,3 @@ if result_c:
     os.remove("./Data/RegisterData.csv")
     os.remove("./Data/PaidData.csv")
     st.success("Files are Deleted")
-
-
-
-
-
-
-
-
